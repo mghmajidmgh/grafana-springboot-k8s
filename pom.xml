@@ -4,7 +4,7 @@
          http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.example</groupId>
-    <artifactId>demo-graalvm</artifactId>
+    <artifactId>demo-grafana-springboot-k8s</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <properties>
         <java.version>21</java.version>
@@ -74,7 +74,7 @@
                         </executions>
                     </plugin>
                     <plugin>
-                        <groupId>org.graalvm.buildtools</groupId>
+                        <groupId>org.grafana-springboot-k8s.buildtools</groupId>
                         <artifactId>native-maven-plugin</artifactId>
                         <version>0.10.2</version>
                         <extensions>true</extensions>

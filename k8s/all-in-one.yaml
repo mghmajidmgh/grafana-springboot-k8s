@@ -3,21 +3,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: demo-graalvm
+  name: demo-grafana-springboot-k8s
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: demo-graalvm
+      app: demo-grafana-springboot-k8s
   template:
     metadata:
       labels:
-        app: demo-graalvm
+        app: demo-grafana-springboot-k8s
     spec:
       containers:
-      - name: demo-graalvm
+      - name: demo-grafana-springboot-k8s
         # Replace this image with your pushed Docker Hub image
-        image: mghmajidmgh/graalvm-springboot:latest
+        image: mghmajidmgh/grafana-springboot-k8s-springboot:latest
         ports:
         - containerPort: 8080
 
@@ -26,10 +26,10 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: demo-graalvm
+  name: demo-grafana-springboot-k8s
 spec:
   selector:
-    app: demo-graalvm
+    app: demo-grafana-springboot-k8s
   ports:
     - protocol: TCP
       port: 80
@@ -52,7 +52,7 @@ data:
     scrape_configs:
       - job_name: 'spring-boot-app'
         static_configs:
-          - targets: ['demo-graalvm:8080']
+          - targets: ['demo-grafana-springboot-k8s:8080']
 
 ---
 # Prometheus Deployment
@@ -177,4 +177,9 @@ spec:
     - protocol: TCP
       port: 3000
       targetPort: 3000
-  type: ClusterIP
+  type: NodePort
+  ports:
+    - protocol: TCP
+      port: 3000
+      targetPort: 3000
+      nodePort: 32000
