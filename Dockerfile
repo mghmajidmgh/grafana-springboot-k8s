@@ -5,7 +5,7 @@ WORKDIR /app
 COPY . .
 # Build the standard Spring Boot executable jar (not the native image)
 RUN chmod +x mvnw && \
-    ./mvnw -B --no-transfer-progress package -DskipTests && \
+    ./mvnw package -DskipTests && \
     echo ""; echo "=== target directory listing ==="; ls -la target/ || true
 
 # Run Stage: use a small JRE image to run the packaged jar
