@@ -8,10 +8,14 @@ RUN chmod +x mvnw && \
     ./mvnw package -DskipTests && \
     echo ""; echo "=== target directory listing ==="; ls -la target/ || true
 
+    # remove the .original file if present
+RUN rm -f /app/target/*-SNAPSHOT.jar.original
+
 # Run Stage: use a small JRE image to run the packaged jar
 FROM eclipse-temurin:21-jre
 
 WORKDIR /app
+
 # Copy the packaged jar from the builder stage. The spring-boot plugin writes
 # the executable jar under target/ with the artifactId/version name; copy any
 # matching jar and rename to app.jar for a stable entrypoint.
